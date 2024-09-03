@@ -14,6 +14,9 @@ public class Paciente{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public String IdPaciente;
 
+    public String nomeCompleto;
+
+    public Sexo sexo;
 
 
 

@@ -29,6 +29,9 @@ public class Paciente{
 
     public List<Telefone> telefone;
 
+    public List<Remedios> remedios;
+
+    public List<Alergias> alergias;
 
 
 

@@ -5,12 +5,12 @@ import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.*;
-
-@Data
 @Entity
-public class {
+@Data
+public class Remedios {
 
-  @Id 
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  
+  public Long id_Remedio;
+
+  public String nome_Remedio;
+
 }

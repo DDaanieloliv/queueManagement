@@ -7,32 +7,31 @@ import java.time.LocalDate;
 import java.util.*;
 
 @Data
-@Entity // Define que a classe será mapeada no BD como uma entidade.
-public class Paciente {
+@Entity //Define que a classe será mapeada no BD como uma entidade.
+public class Paciente{
 
-    @Id // Define que o atributo anotado como chave primaria.
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Estrategia de geração de chave.
+    @Id //Define que o atributo anotado como chave primaria.
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //Estrategia de geração de chave.
     public Long IdPaciente;
 
     @Column(name = "nome_completo")
     public String nomeCompleto;
 
-    @Column(nullable = false)
     public LocalDate dataNascimento;
 
-    @Column(nullable = false)
     public Sexo sexo;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true , nullable = false)
     public String registroGeral;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true , nullable = false)
     public String cpf;
 
-
-
-
     public List<Telefone> telefone;
+
+
+
+
 
 
 }

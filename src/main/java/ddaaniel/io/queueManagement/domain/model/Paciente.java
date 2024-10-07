@@ -30,9 +30,11 @@ public class Paciente{
     @Column(length = 20)
     public String telefone;
 
-    @ManyToOne
-    @JoinColumn(name = "id_endereco")
-    public Endereco endereco;
+    public String sintoma_paciente;
+
+    //@ManyToOne
+    //@JoinColumn(name = "id_endereco")
+    //public Endereco endereco;
     //  Indica um relacionamento Many-to-One (Muitos-para-Um) entre Paciente e Endereco.
     //  Isso significa que muitos pacientes podem estar associados a um único endereço.
     //  Na classe Java, esse é um relacionamento de associação bidirecional.

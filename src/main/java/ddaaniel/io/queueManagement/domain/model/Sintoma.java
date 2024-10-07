@@ -18,4 +18,8 @@ public class Sintoma {
 
     @Column(nullable = false, length = 255)
     private String descricao;
+
+
+
+
 }

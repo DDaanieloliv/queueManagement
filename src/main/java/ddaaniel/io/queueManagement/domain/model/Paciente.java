@@ -32,6 +32,8 @@ public class Paciente{
 
     public String sintoma_paciente;
 
+    public String consulta_desejada;
+
     //@ManyToOne
     //@JoinColumn(name = "id_endereco")
     //public Endereco endereco;

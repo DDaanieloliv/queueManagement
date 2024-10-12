@@ -3,36 +3,158 @@ package ddaaniel.io.queueManagement.domain.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
-@Data
+
 @Entity //Define que a classe será mapeada no BD como uma entidade.
 public class Paciente{
 
     @Id //Define que o atributo anotado como chave primaria.
     @GeneratedValue(strategy = GenerationType.IDENTITY) //Estrategia de geração de chave.
-    public Long id_paciente;
+    private Long id_paciente;
 
     @Column(name = "nome_completo")
-    public String nomeCompleto;
+    private String nomeCompleto;
 
-    public String dataNascimento;
+    private String dataNascimento;
 
     @Column(nullable = false, length = 1)
-    public Sexo sexo;
+    private Sexo sexo;
 
     @Column(unique = true , nullable = false)
-    public String cpf;
+    private String cpf;
 
     @Column(length = 255)
-    public String email;
+    private String email;
 
     @Column(length = 20)
-    public String telefone;
+    private String telefone;
 
-    public String sintoma_paciente;
+    private String sintoma_paciente;
 
-    public String consulta_desejada;
+    private String consulta_desejada;
+
+    @Enumerated(EnumType.STRING)
+    private CategoriaTriagem categoriaTriagem;
+
+    private LocalDateTime dataHoraChegada;
+
+    // Construtor, getters e setters
+    public Paciente() {
+        this.dataHoraChegada = LocalDateTime.now(); // Registra o tempo de chegada automaticamente
+    }
+
+    public LocalDateTime getDataHoraChegada() {
+        return dataHoraChegada;
+    }
+
+    public Paciente(Long id_paciente, String nomeCompleto, String dataNascimento, Sexo sexo, String cpf, String email, String telefone, String sintoma_paciente, String consulta_desejada, CategoriaTriagem categoriaTriagem, LocalDateTime dataHoraChegada, List<Triagem> triagens) {
+        this.id_paciente = id_paciente;
+        this.nomeCompleto = nomeCompleto;
+        this.dataNascimento = dataNascimento;
+        this.sexo = sexo;
+        this.cpf = cpf;
+        this.email = email;
+        this.telefone = telefone;
+        this.sintoma_paciente = sintoma_paciente;
+        this.consulta_desejada = consulta_desejada;
+        this.categoriaTriagem = categoriaTriagem;
+        this.dataHoraChegada = dataHoraChegada;
+        this.triagens = triagens;
+    }
+
+    public Long getId_paciente() {
+        return id_paciente;
+    }
+
+    public void setId_paciente(Long id_paciente) {
+        this.id_paciente = id_paciente;
+    }
+
+    public String getNomeCompleto() {
+        return nomeCompleto;
+    }
+
+    public void setNomeCompleto(String nomeCompleto) {
+        this.nomeCompleto = nomeCompleto;
+    }
+
+    public String getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(String dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public Sexo getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(Sexo sexo) {
+        this.sexo = sexo;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getSintoma_paciente() {
+        return sintoma_paciente;
+    }
+
+    public void setSintoma_paciente(String sintoma_paciente) {
+        this.sintoma_paciente = sintoma_paciente;
+    }
+
+    public String getConsulta_desejada() {
+        return consulta_desejada;
+    }
+
+    public void setConsulta_desejada(String consulta_desejada) {
+        this.consulta_desejada = consulta_desejada;
+    }
+
+    public CategoriaTriagem getCategoriaTriagem() {
+        return categoriaTriagem;
+    }
+
+    public void setCategoriaTriagem(CategoriaTriagem categoriaTriagem) {
+        this.categoriaTriagem = categoriaTriagem;
+    }
+
+    public void setDataHoraChegada(LocalDateTime dataHoraChegada) {
+        this.dataHoraChegada = dataHoraChegada;
+    }
+
+    public List<Triagem> getTriagens() {
+        return triagens;
+    }
+
+    public void setTriagens(List<Triagem> triagens) {
+        this.triagens = triagens;
+    }
 
     //@ManyToOne
     //@JoinColumn(name = "id_endereco")

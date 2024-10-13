@@ -51,4 +51,4 @@ public class QueueController {
         }
         return ResponseEntity.notFound().build();
     }
-}}
+}

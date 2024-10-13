@@ -2,11 +2,13 @@ package ddaaniel.io.queueManagement.domain.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.*;
 
-
+@Data
 @Entity //Define que a classe será mapeada no BD como uma entidade.
 public class Paciente{
 
@@ -40,121 +42,6 @@ public class Paciente{
 
     private LocalDateTime dataHoraChegada;
 
-    // Construtor, getters e setters
-    public Paciente() {
-        this.dataHoraChegada = LocalDateTime.now(); // Registra o tempo de chegada automaticamente
-    }
-
-    public LocalDateTime getDataHoraChegada() {
-        return dataHoraChegada;
-    }
-
-    public Paciente(Long id_paciente, String nomeCompleto, String dataNascimento, Sexo sexo, String cpf, String email, String telefone, String sintoma_paciente, String consulta_desejada, CategoriaTriagem categoriaTriagem, LocalDateTime dataHoraChegada, List<Triagem> triagens) {
-        this.id_paciente = id_paciente;
-        this.nomeCompleto = nomeCompleto;
-        this.dataNascimento = dataNascimento;
-        this.sexo = sexo;
-        this.cpf = cpf;
-        this.email = email;
-        this.telefone = telefone;
-        this.sintoma_paciente = sintoma_paciente;
-        this.consulta_desejada = consulta_desejada;
-        this.categoriaTriagem = categoriaTriagem;
-        this.dataHoraChegada = dataHoraChegada;
-        this.triagens = triagens;
-    }
-
-    public Long getId_paciente() {
-        return id_paciente;
-    }
-
-    public void setId_paciente(Long id_paciente) {
-        this.id_paciente = id_paciente;
-    }
-
-    public String getNomeCompleto() {
-        return nomeCompleto;
-    }
-
-    public void setNomeCompleto(String nomeCompleto) {
-        this.nomeCompleto = nomeCompleto;
-    }
-
-    public String getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(String dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
-
-    public Sexo getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(Sexo sexo) {
-        this.sexo = sexo;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public String getSintoma_paciente() {
-        return sintoma_paciente;
-    }
-
-    public void setSintoma_paciente(String sintoma_paciente) {
-        this.sintoma_paciente = sintoma_paciente;
-    }
-
-    public String getConsulta_desejada() {
-        return consulta_desejada;
-    }
-
-    public void setConsulta_desejada(String consulta_desejada) {
-        this.consulta_desejada = consulta_desejada;
-    }
-
-    public CategoriaTriagem getCategoriaTriagem() {
-        return categoriaTriagem;
-    }
-
-    public void setCategoriaTriagem(CategoriaTriagem categoriaTriagem) {
-        this.categoriaTriagem = categoriaTriagem;
-    }
-
-    public void setDataHoraChegada(LocalDateTime dataHoraChegada) {
-        this.dataHoraChegada = dataHoraChegada;
-    }
-
-    public List<Triagem> getTriagens() {
-        return triagens;
-    }
-
-    public void setTriagens(List<Triagem> triagens) {
-        this.triagens = triagens;
-    }
 
     //@ManyToOne
     //@JoinColumn(name = "id_endereco")
@@ -167,8 +54,8 @@ public class Paciente{
     //  para a tabela Endereco. Isso especifica o nome da coluna que será usada para
     //  associar a entidade Endereco a Paciente.
 
-    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Triagem> triagens;
+    //@OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
+    //private List<Triagem> triagens;
 
     //  @OneToMany(mappedBy = "paciente"):
     //      Indica um relacionamento One-to-Many (Um-para-Muitos) entre Paciente e Triagem.

@@ -1,45 +1,74 @@
 package ddaaniel.io.queueManagement.service;
 
 import ddaaniel.io.queueManagement.domain.model.Paciente;
+import ddaaniel.io.queueManagement.domain.repository.PacienteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Comparator;
+import java.util.stream.Collectors;
 
+@Service
 public class FilaDePacientes {
-    private PriorityQueue<Paciente> fila;
 
-    // Inicializa a fila com um comparador que ordena por categoria de triagem e tempo de chegada
-    public FilaDePacientes() {
-        fila = new PriorityQueue<>(new Comparator<Paciente>() {
-            @Override
-            public int compare(Paciente p1, Paciente p2) {
-                // Primeiro, comparar a prioridade da triagem
-                int prioridadeComparacao = Integer.compare(p1.getCategoriaTriagem().getPrioridade(), p2.getCategoriaTriagem().getPrioridade());
+    @Autowired
+    private PacienteRepository pacienteRepository;
 
-                // Se a prioridade for a mesma, comparar o tempo de chegada
-                if (prioridadeComparacao == 0) {
-                    return p1.getDataHoraChegada().compareTo(p2.getDataHoraChegada());
-                }
-
-                return prioridadeComparacao;
-            }
-        });
-    }
-
-    // Adicionar paciente na fila
+    // Adicionar paciente na fila (salva no banco de dados)
     public void adicionarPaciente(Paciente paciente) {
-        fila.add(paciente);
+        pacienteRepository.save(paciente);
     }
 
-    // Chamar próximo paciente
+    // Chamar o próximo paciente (o de maior prioridade)
     public Paciente chamarProximo() {
-        return fila.poll(); // Remove e retorna o paciente com maior prioridade
+        // Buscamos todos os pacientes e os ordenamos
+        List<Paciente> fila = pacienteRepository.findAll().stream()
+                .sorted((p1, p2) -> {
+                    // Utilizando diretamente o método getPrioridade do enum CategoriaTriagem
+                    int prioridadeComparacao = Integer.compare(
+                            p1.getCategoriaTriagem().getPrioridade(),
+                            p2.getCategoriaTriagem().getPrioridade()
+                    );
+                    if (prioridadeComparacao == 0) {
+                        // Se as prioridades forem iguais, compara pelo horário de chegada
+                        return p1.getDataHoraChegada().compareTo(p2.getDataHoraChegada());
+                    }
+                    return prioridadeComparacao;
+                }).collect(Collectors.toList());
+
+        if (!fila.isEmpty()) {
+            Paciente proximo = fila.get(0);
+            pacienteRepository.delete(proximo); // Remove o paciente do banco ao ser chamado
+            return proximo;
+        }
+        return null; // Se não houver pacientes na fila
     }
 
-    // Visualizar a fila
+    // Visualizar a fila (ordenada por prioridade e tempo de chegada)
     public List<Paciente> verFila() {
-        return new ArrayList<>(fila); // Retorna a lista em ordem de prioridade
+        return pacienteRepository.findAll().stream()
+                .sorted((p1, p2) -> {
+                    // Utilizando diretamente o método getPrioridade do enum CategoriaTriagem
+                    int prioridadeComparacao = Integer.compare(
+                            p1.getCategoriaTriagem().getPrioridade(),
+                            p2.getCategoriaTriagem().getPrioridade()
+                    );
+                    if (prioridadeComparacao == 0) {
+                        // Se as prioridades forem iguais, compara pelo horário de chegada
+                        return p1.getDataHoraChegada().compareTo(p2.getDataHoraChegada());
+                    }
+                    return prioridadeComparacao;
+                }).collect(Collectors.toList());
+    }
+
+    // Função auxiliar para obter a prioridade da categoria de triagem
+    private int getPrioridadeCategoria(String categoriaTriagem) {
+        switch (categoriaTriagem.toLowerCase()) {
+            case "vermelho": return 1;
+            case "amarelo": return 2;
+            case "verde": return 3;
+            case "azul": return 4;
+            default: return 5; // Menor prioridade
+        }
     }
 }

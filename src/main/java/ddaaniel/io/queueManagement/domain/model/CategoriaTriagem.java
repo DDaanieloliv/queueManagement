@@ -17,6 +17,11 @@ public enum CategoriaTriagem {
         this.prioridade = prioridade;
     }
 
+    //  O construtor permite que você inicialize atributos associados a cada constante do enum no
+    //  momento em que o enum é declarado. No caso de CategoriaTriagem, o atributo prioridade é
+    //  inicializado com um valor específico para cada constante. Sem o construtor, não haveria
+    //  como passar esses valores ao criar as constantes.
+
     public int getPrioridade() {
         return prioridade;
     }

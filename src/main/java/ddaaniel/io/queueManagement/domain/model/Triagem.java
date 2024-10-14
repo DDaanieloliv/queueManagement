@@ -1,4 +1,4 @@
-package ddaaniel.io.queueManagement.domain.model;
+/*package ddaaniel.io.queueManagement.domain.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -33,3 +33,4 @@ public class Triagem {
     private List<Sintoma> sintomas;
 
 }
+*/

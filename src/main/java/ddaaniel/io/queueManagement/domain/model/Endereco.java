@@ -1,4 +1,4 @@
-package ddaaniel.io.queueManagement.domain.model;
+/*package ddaaniel.io.queueManagement.domain.model;
 
 import jakarta.persistence.*;
 
@@ -36,3 +36,5 @@ public class Endereco {
         private String pais;
 
 }
+
+ */

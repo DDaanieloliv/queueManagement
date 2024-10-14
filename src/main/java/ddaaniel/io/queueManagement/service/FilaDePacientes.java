@@ -16,7 +16,19 @@ public class FilaDePacientes {
 
     // Adicionar paciente na fila (salva no banco de dados)
     public void adicionarPaciente(Paciente paciente) {
-        pacienteRepository.save(paciente);
+        String codigo;
+        do {
+            // Gera um código aleatório
+            paciente.gerarCodigoCodigo();
+            codigo = paciente.getCodigoCodigo();
+        } while (!isCodigoUnico(codigo));  // Verifica se é único
+
+        pacienteRepository.save(paciente);;
+    }
+
+    // Verifica se o código gerado é único no banco de dados
+    private boolean isCodigoUnico(String codigo) {
+        return !pacienteRepository.existsByCodigoCodigo(codigo);
     }
 
     // Chamar o próximo paciente (o de maior prioridade)
@@ -35,6 +47,8 @@ public class FilaDePacientes {
                     }
                     return prioridadeComparacao;
                 }).collect(Collectors.toList());
+        //  O metodo ´sorted´ ordena a lista de paciente de acordo com a regra que colocamos
+        //  dentro da função lambda, deixando a lista na ordem "da maior prioridade -> para a menor".
 
         if (!fila.isEmpty()) {
             Paciente proximo = fila.get(0);

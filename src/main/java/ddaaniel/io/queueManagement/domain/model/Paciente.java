@@ -42,6 +42,28 @@ public class Paciente{
 
     private LocalDateTime dataHoraChegada;
 
+    @Column(unique = true, length = 5) // Definindo como único e com tamanho de 5 caracteres
+    private String codigoCodigo;
+
+
+
+    // Gera o código aleatório de 5 caracteres (letras e números)
+    public void gerarCodigoCodigo() {
+        this.codigoCodigo = gerarCodigo();
+    }
+
+    // Função privada para gerar um código de 5 caracteres
+    private String gerarCodigo() {
+        String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        Random random = new Random();
+        StringBuilder codigo = new StringBuilder();
+        for (int i = 0; i < 5; i++) {
+            codigo.append(caracteres.charAt(random.nextInt(caracteres.length())));
+        }
+        return codigo.toString();
+    }
+
+}
 
     //@ManyToOne
     //@JoinColumn(name = "id_endereco")
@@ -118,7 +140,6 @@ public class Paciente{
     // unidirecionais e bidirecionais, pois a chave estrangeira está sempre na tabela da
     // entidade que é o lado proprietário do relacionamento.
 
-}
 
 
 

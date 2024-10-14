@@ -1,4 +1,4 @@
-package ddaaniel.io.queueManagement.service;
+/*package ddaaniel.io.queueManagement.service;
 
 import ddaaniel.io.queueManagement.domain.model.Paciente;
 import ddaaniel.io.queueManagement.domain.repository.*;
@@ -31,3 +31,4 @@ public class queueService {
 
 }
 
+*/

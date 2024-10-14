@@ -1,4 +1,4 @@
-package ddaaniel.io.queueManagement.domain.repository;
+/*package ddaaniel.io.queueManagement.domain.repository;
 
 import ddaaniel.io.queueManagement.domain.model.Sintoma;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,3 +9,4 @@ import java.nio.file.LinkOption;
 @Repository
 public interface SintomaRepository extends JpaRepository<Sintoma, Long> {
 }
+*/

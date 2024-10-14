@@ -1,4 +1,4 @@
-package ddaaniel.io.queueManagement.domain.model;
+/*package ddaaniel.io.queueManagement.domain.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -22,3 +22,4 @@ public class SinalVital {
     @Column(nullable = false, length = 50)
     private String valor;  // Ex.: "120/80 mmHg", "75 bpm"
 }
+*/

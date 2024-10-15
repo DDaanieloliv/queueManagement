@@ -12,6 +12,7 @@ public class MailConfig {
 
     @Bean
     public JavaMailSender mailSender() {
+        /*
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost("smtp.gmail.com"); // Defina aqui o host do seu SMTP qoqy eftt oipu zwnl
 
@@ -27,5 +28,8 @@ public class MailConfig {
         props.put("mail.debug", "true");
 
         return mailSender;
+
+        */
+        return new JavaMailSenderImpl();
     }
 }

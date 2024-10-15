@@ -1,13 +1,10 @@
-package ddaaniel.io.queueManagement.mail;
+package ddaaniel.io.queueManagement.service;
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
-import java.util.Properties;
 
 @Service
 public class EmailService {

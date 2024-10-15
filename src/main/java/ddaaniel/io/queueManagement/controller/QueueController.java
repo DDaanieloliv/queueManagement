@@ -1,14 +1,13 @@
 package ddaaniel.io.queueManagement.controller;
 
 import ddaaniel.io.queueManagement.domain.model.Paciente;
-import ddaaniel.io.queueManagement.mail.EmailService;
+import ddaaniel.io.queueManagement.service.EmailService;
 import ddaaniel.io.queueManagement.service.FilaDePacientes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/fila")
@@ -54,6 +53,22 @@ public class QueueController {
         List<Paciente> fila = filaDePacientes.verFila();
         return ResponseEntity.ok(fila);
     }
+
+
+    // Endpoint para ver a posição de um paciente específico pelo códigoCodigo
+    @GetMapping("/posicao/{codigoCodigo}")
+    public ResponseEntity<Integer> verPosicaoPacientePorCodigo(@PathVariable String codigoCodigo) {
+        List<Paciente> fila = filaDePacientes.verFila();
+        for (int i = 0; i < fila.size(); i++) {
+            // Comparar o código do paciente com o código fornecido
+            String codigoPaciente = filaDePacientes.obterCodigoPaciente(fila.get(i).getId_paciente());
+            if (codigoPaciente != null && codigoPaciente.equals(codigoCodigo)) {
+                return ResponseEntity.ok(i + 1); // Retorna a posição do paciente na fila (1-based)
+            }
+        }
+        return ResponseEntity.notFound().build();
+    }
+
 
     // Endpoint para ver a posição de um paciente específico pelo ID
     @GetMapping("/posicao/{id}")

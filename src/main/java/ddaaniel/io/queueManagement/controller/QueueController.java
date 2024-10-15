@@ -1,6 +1,7 @@
 package ddaaniel.io.queueManagement.controller;
 
 import ddaaniel.io.queueManagement.domain.model.Paciente;
+import ddaaniel.io.queueManagement.mail.EmailService;
 import ddaaniel.io.queueManagement.service.FilaDePacientes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +17,24 @@ public class QueueController {
     @Autowired
     private FilaDePacientes filaDePacientes;
 
+    @Autowired
+    private EmailService emailService;
+
+
     // Endpoint para adicionar um paciente à fila
     @PostMapping("/adicionar")
     public ResponseEntity<String> adicionarPaciente(@RequestBody Paciente paciente) {
         filaDePacientes.adicionarPaciente(paciente);
+
+        // Recupera o código e o e-mail do paciente
+        String codigoCodigo = filaDePacientes.obterCodigoPaciente(paciente.getId_paciente());
+        String emailPaciente = filaDePacientes.obterEmailPaciente(paciente.getId_paciente());
+
+        // Envia o e-mail com o código
+        if (codigoCodigo != null && emailPaciente != null) {
+            emailService.enviarEmail(emailPaciente, codigoCodigo);
+        }
+
         return ResponseEntity.ok("Paciente adicionado à fila com sucesso!");
     }
 

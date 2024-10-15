@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -84,5 +85,17 @@ public class FilaDePacientes {
             case "azul": return 4;
             default: return 5; // Menor prioridade
         }
+    }
+
+    // Obter o e-mail do paciente pelo ID
+    public String obterEmailPaciente(Long pacienteId) {
+        Optional<Paciente> pacienteOpt = pacienteRepository.findById(pacienteId);
+        return pacienteOpt.map(Paciente::getEmail).orElse(null);
+    }
+
+    // Obter o código do paciente pelo ID
+    public String obterCodigoPaciente(Long pacienteId) {
+        Optional<Paciente> pacienteOpt = pacienteRepository.findById(pacienteId);
+        return pacienteOpt.map(Paciente::getCodigoCodigo).orElse(null);
     }
 }
